@@ -14,7 +14,7 @@ export function makeOrg(overwrite?: Overwrite) {
   return {
     id: crypto.randomUUID(),
     name: faker.commerce.productName(),
-    create_at: faker.date.anytime(),
+    created_at: faker.date.anytime(),
     phone: faker.phone.number(),
     address: overwrite?.address ?? faker.location.street(),
     city:
