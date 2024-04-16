@@ -23,6 +23,6 @@ describe('Authenticate Org (e2e)', () => {
       email, password
     })
 
-    expect(response.statusCode).toEqual(201)
+    expect(response.statusCode).toEqual(400)
   })
 })

@@ -15,7 +15,15 @@ describe('Register Org (e2e)', () => {
 
   it('should be able to register a org', async () => {
 
-    const response = await request(app.server).post('/org').send(makeOrg())
+    const response = await request(app.server).post('/org').send({
+      name: 'Org Doe1',
+      phone: '(99)9999-9999',
+      address: '99 street',
+      city: 'city',
+      password: '123456',
+      cep: '888888-88',
+      email: 'test@test.com'
+    })
 
     expect(response.statusCode).toEqual(201)
   })

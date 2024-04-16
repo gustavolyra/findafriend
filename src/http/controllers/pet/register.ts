@@ -14,7 +14,6 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const { name, age, breed, orgId } = registerPetSchema.parse(request.body)
-
   try {
     const registerPetUseCase = makerRegisterPetUseCase()
     await registerPetUseCase.execute({

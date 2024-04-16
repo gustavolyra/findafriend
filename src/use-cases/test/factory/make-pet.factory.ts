@@ -13,7 +13,7 @@ export function makePet(overwrite?: Overwrite) {
     id: crypto.randomUUID(),
     name: faker.person.firstName(),
     age: overwrite?.age ?? faker.number.int(),
-    create_at: faker.date.anytime(),
+    created_at: faker.date.anytime(),
     breed:
       overwrite?.breed ??
       faker.animal.dog(),

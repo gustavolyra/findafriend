@@ -5,6 +5,7 @@ import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createAndAuthenticateUser } from "../../utils/test/create-and-authenticate";
 import { makePet } from "@/use-cases/test/factory/make-pet.factory";
+import { randomUUID } from "node:crypto";
 
 
 describe('Adopted Pet (e2e)', () => {
@@ -21,7 +22,15 @@ describe('Adopted Pet (e2e)', () => {
 
     const org = await prisma.org.create({ data: makeOrg() })
     const pet = await prisma.pet.create({
-      data: makePet()
+      data: {
+        id: randomUUID(),
+        name: 'John',
+        age: 1,
+        created_at: new Date(),
+        breed: 'poodle',
+        isAvailable: true,
+        orgId: org.id,
+      }
     })
     const response = await request(app.server).post(`/pet/${pet.id}/adopted`).set('Authorization', `Bearer ${token}`)
 

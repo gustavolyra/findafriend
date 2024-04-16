@@ -1,7 +1,7 @@
 ### Regras da aplicação
 
 X Deve ser possível cadastrar um pet
-S- Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
+X- Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 X- Deve ser possível filtrar pets por suas características 
   X->age
   X->breed

@@ -20,7 +20,7 @@ describe('Search Pet (e2e)', () => {
     const { token } = await createAndAuthenticateUser(app)
     const city = 'city A'
     const org = await prisma.org.create({ data: makeOrg({ city }) })
-    const pet = await prisma.pet.create({
+    await prisma.pet.create({
       data: {
         name: 'john',
         age: 5,
@@ -29,9 +29,7 @@ describe('Search Pet (e2e)', () => {
       }
     })
     const response = await request(app.server).get('/pet').set('Authorization', `Bearer ${token}`)
-      .send({
-        city
-      })
+      .query({ city, minAge: 2, maxAge: 5, breed: 'poodle', orgId: org.id })
 
     expect(response.statusCode).toEqual(201)
   })
