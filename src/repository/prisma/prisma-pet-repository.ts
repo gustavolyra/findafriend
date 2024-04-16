@@ -33,8 +33,8 @@ export class PrismaPetRepository implements PetRepository {
     const pet = await prisma.pet.findMany({
       where: {
         age: {
-          gte: Number(params.minAge),
-          lte: Number(params.maxAge),
+          gte: params.minAge,
+          lte: params.maxAge,
         },
         breed: params.breed,
         orgId: params.orgId,

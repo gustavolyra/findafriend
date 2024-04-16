@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { faker } from '@faker-js/faker'
 import { hash } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 import request from 'supertest'
@@ -8,8 +9,8 @@ export async function createAndAuthenticateUser(
 ) {
   await prisma.org.create({
     data: {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
+      name: faker.person.firstName(),
+      email: faker.internet.email(),
       password_hash: await hash('123456', 6),
       phone: '999999',
       city: 'city A',

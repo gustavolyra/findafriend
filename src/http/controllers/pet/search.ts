@@ -6,6 +6,7 @@ import { z } from "zod";
 
 
 export async function search(request: FastifyRequest, reply: FastifyReply) {
+  console.log('here')
   const querySchema = z.object({
     maxAge: z.string().optional(),
     minAge: z.string().optional(),
@@ -14,13 +15,19 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
     city: z.string()
   })
 
+  console.log('here')
   const { minAge, maxAge, breed, orgId, city } = querySchema.parse(
     request.query,
   )
+  let minimumAge = 0
+  let maximumAge = 20
+  if (minAge) minimumAge = Number(minimumAge)
+  if (maxAge) maximumAge = Number(maximumAge)
+
   try {
     const fetchPetUserCase = makerFectchPetUseCase()
     await fetchPetUserCase.execute({
-      breed, minAge: Number(minAge), maxAge: Number(maxAge), orgId, city
+      breed, minAge: minimumAge, maxAge: maximumAge, orgId, city
     })
   } catch (err) {
     throw err
