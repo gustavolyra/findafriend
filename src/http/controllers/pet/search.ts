@@ -6,21 +6,21 @@ import { z } from "zod";
 
 
 export async function search(request: FastifyRequest, reply: FastifyReply) {
-
-  const registerPetSchema = z.object({
-    maxAge: z.number().optional(),
-    minAge: z.number().optional(),
+  const querySchema = z.object({
+    maxAge: z.string().optional(),
+    minAge: z.string().optional(),
     breed: z.string().optional(),
     orgId: z.string().optional(),
     city: z.string()
   })
 
-  const { minAge, maxAge, breed, orgId, city } = registerPetSchema.parse(request.body)
-
+  const { minAge, maxAge, breed, orgId, city } = querySchema.parse(
+    request.query,
+  )
   try {
     const fetchPetUserCase = makerFectchPetUseCase()
     await fetchPetUserCase.execute({
-      breed, minAge, maxAge, orgId, city
+      breed, minAge: Number(minAge), maxAge: Number(maxAge), orgId, city
     })
   } catch (err) {
     throw err

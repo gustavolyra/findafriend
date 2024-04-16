@@ -17,7 +17,15 @@ describe('Refresh Org (e2e)', () => {
     const email = 'johndoeorg@test.com'
     const password = '123456'
 
-    await request(app.server).post('/org').send(makeOrg({ email, password }))
+    await request(app.server).post('/org').send({
+      name: 'Org Doe1',
+      phone: '(99)9999-9999',
+      address: '99 street',
+      city: 'city',
+      password,
+      cep: '888888-88',
+      email
+    })
 
     const authResponse = await request(app.server).post('/sessions').send({
       email, password

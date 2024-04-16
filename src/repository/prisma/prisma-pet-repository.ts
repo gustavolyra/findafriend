@@ -16,6 +16,7 @@ export class PrismaPetRepository implements PetRepository {
     return pet
   }
   async create(data: Prisma.PetUncheckedCreateInput) {
+
     const pet = await prisma.pet.create({ data })
     return pet
   }
@@ -28,11 +29,12 @@ export class PrismaPetRepository implements PetRepository {
     return pet
   }
   async findAll(params: FindAllParams): Promise<{ id: string; name: string; age: number; created_at: Date; breed: string; isAvailable: boolean; orgId: string; }[]> {
+
     const pet = await prisma.pet.findMany({
       where: {
         age: {
-          gte: params.minAge,
-          lte: params.maxAge,
+          gte: Number(params.minAge),
+          lte: Number(params.maxAge),
         },
         breed: params.breed,
         orgId: params.orgId,

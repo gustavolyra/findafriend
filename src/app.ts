@@ -5,6 +5,7 @@ import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
 import { petRoutes } from './http/controllers/pet/routes'
 import { orgRoutes } from './http/controllers/org/routes'
+import { request } from 'node:http'
 export const app = fastify()
 
 app.register(fastifyJwt, {
@@ -24,6 +25,7 @@ app.register(orgRoutes)
 
 app.setErrorHandler((error, _request, reply) => {
   if (error instanceof ZodError) {
+
     return reply
       .status(404)
       .send({ message: 'Validation error', issue: error.format() })
